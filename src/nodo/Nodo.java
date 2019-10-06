@@ -12,7 +12,14 @@ public class Nodo<T> {
 	public T getDato() {
 		return dato;
 	}
+	
+	public void setDato(T dato) {
+		this.dato=dato;
+	}
 
+	public void setSig(Nodo<T> sig) {
+		this.sig=sig;
+	}
 
 	public Nodo<T> getSig() {
 		return sig;

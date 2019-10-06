@@ -4,46 +4,47 @@ public class ColaEstatica<T> implements Cola<T>{
 
 	private T cola[];
 	private int first;
-	private int last;
+	private int elems;
 	
 	public ColaEstatica(int TAM) {
 		cola = (T[]) new Object[TAM];
-		first = -1;
-		last = -1;
+		first = 0;
+		elems = 0;
 	}
 	
 	@Override
 	public boolean offer(T dato) {
-		if(cola.length==last-1)
+		if(elems==cola.length)
 			return false;
-		if(last==-1)
-			first=0;
-		cola[++last]=dato;
+		cola[(first+elems)%cola.length]=dato;
+		elems++;
 		return true;
 	}
 
 	@Override
 	public void poll() {
-		// TODO Auto-generated method stub
-		
+		if(elems==0)
+			return;
+		first = (first+1)%elems;
+		elems--;
 	}
 
 	@Override
 	public T peek() {
-		// TODO Auto-generated method stub
-		return null;
+		if(elems==0)
+			return null;
+		return cola[first];
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return elems==0 ? true : false;
 	}
 
 	@Override
 	public void empty() {
-		// TODO Auto-generated method stub
-		
+		first=-1;
+		elems=0;
 	}
 
 }
